@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="XTabHost">
+        <!--半径-->
+        <attr name="radius" format="dimension" />
+        <!--文字大小-->
+        <attr name="text_size" format="dimension" />
+        <!--文本选中的颜色-->
+        <attr name="text_select_color" format="color" />
+        <!--文本未选中的颜色-->
+        <attr name="text_unselect_color" format="color" />
+        <!--tab选中的颜色-->
+        <attr name="tab_select_color" format="color" />
+        <!--tab没选中的颜色-->
+        <attr name="tab_unselect_color" format="color" />
+        <!--tab间距-->
+        <attr name="tab_space" format="dimension" />
+        <!--tab的宽,在包裹的时候用到-->
+        <attr name="tab_width" format="dimension"/>
+        <!--tab的高,在包裹的时候用到-->
+        <attr name="tab_height" format="dimension"/>
+        <!--整体的背景-->
+        <attr name="bg" format="color" />
+        <!--默认显示第几个-->
+        <attr name="default_index" format="integer" />
+        <!--显示的文本数组-->
+        <attr name="src" format="reference" />
+    </declare-styleable>
+</resources>
