@@ -55,16 +55,19 @@ public class XFlowLayout extends ViewGroup {
         //寻找孩子中最高的一个孩子
         findMaxChildMaxHeight();
 
-        int left = 0, top = 0;
+        //初始化值
+        int left = getPaddingLeft(), top = getPaddingTop();
+
+        //循环所有的孩子
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View view = getChildAt(i);
 
-            if (left != 0) { //是否是一行的开头
-                if ((left + view.getMeasuredWidth()) > sizeWidth) { //需要换行了,因为放不下啦
+            if (left != getPaddingLeft()) { //是否是一行的开头
+                if ((left + view.getMeasuredWidth()) > sizeWidth - getPaddingRight()) { //需要换行了,因为放不下啦
                     //计算出下一行的top
                     top += mChildMaxHeight + mVSpace;
-                    left = 0;
+                    left = getPaddingLeft();
                 }
             }
 
@@ -76,9 +79,9 @@ public class XFlowLayout extends ViewGroup {
             //直接使用父类推荐的宽和高
             setMeasuredDimension(sizeWidth, sizeHeight);
         } else if (modeHeight == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(sizeWidth, (top + mChildMaxHeight) > sizeHeight ? sizeHeight : top + mChildMaxHeight);
+            setMeasuredDimension(sizeWidth, (top + mChildMaxHeight + getPaddingBottom()) > sizeHeight ? sizeHeight : top + mChildMaxHeight + getPaddingBottom());
         } else {
-            setMeasuredDimension(sizeWidth, top + mChildMaxHeight);
+            setMeasuredDimension(sizeWidth, top + mChildMaxHeight + getPaddingBottom());
         }
 
     }
@@ -104,16 +107,20 @@ public class XFlowLayout extends ViewGroup {
         findMaxChildMaxHeight();
 
         //开始安排孩子的位置
-        int left = 0, top = 0;
+
+        //初始化值
+        int left = getPaddingLeft(), top = getPaddingTop();
+
+        //循环所有的孩子
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View view = getChildAt(i);
 
-            if (left != 0) { //是否是一行的开头
-                if ((left + view.getMeasuredWidth()) > getWidth()) { //需要换行了,因为放不下啦
+            if (left != getPaddingLeft()) { //是否是一行的开头
+                if ((left + view.getMeasuredWidth()) > getWidth() - getPaddingRight()) { //需要换行了,因为放不下啦
                     //计算出下一行的top
                     top += mChildMaxHeight + mVSpace;
-                    left = 0;
+                    left = getPaddingLeft();
                 }
             }
 

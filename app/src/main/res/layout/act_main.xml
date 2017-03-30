@@ -10,6 +10,10 @@
         android:layout_width="match_parent"
         app:h_space="0dp"
         app:v_space="0dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="60dp"
         android:background="#123456"
         android:layout_height="wrap_content">
 
