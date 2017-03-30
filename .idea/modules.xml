@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/WidgetDemo.iml" filepath="$PROJECT_DIR$/WidgetDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/widget.iml" filepath="$PROJECT_DIR$/widget.iml" />
       <module fileurl="file://$PROJECT_DIR$/widget/widget.iml" filepath="$PROJECT_DIR$/widget/widget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/widget/widget-widget.iml" filepath="$PROJECT_DIR$/widget/widget-widget.iml" />
     </modules>
   </component>
 </project>
