@@ -44,13 +44,14 @@ public class XFlowLayout extends ViewGroup {
 
         int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
         int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
+        int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
 
-        int mWidthMeasureSpec = MeasureSpec.makeMeasureSpec(sizeWidth, MeasureSpec.AT_MOST);
-        int mHeightMeasureSpec = MeasureSpec.makeMeasureSpec(sizeHeight, MeasureSpec.AT_MOST);
+//        int mWidthMeasureSpec = MeasureSpec.makeMeasureSpec(sizeWidth, modeWidth);
+//        int mHeightMeasureSpec = MeasureSpec.makeMeasureSpec(sizeHeight, modeHeight);
 
         //测量孩子的大小
-        measureChildren(mWidthMeasureSpec, mHeightMeasureSpec);
+        measureChildren(widthMeasureSpec, heightMeasureSpec);
 
         //寻找孩子中最高的一个孩子
         findMaxChildMaxHeight();

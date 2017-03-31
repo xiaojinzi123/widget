@@ -6,101 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.move.widgetdemo.MainAct">
 
-    <com.move.widget.XFlowLayout
+    <ScrollView
         android:layout_width="match_parent"
-        app:h_space="0dp"
-        app:v_space="0dp"
-        android:paddingLeft="10dp"
-        android:paddingBottom="20dp"
-        android:paddingTop="20dp"
-        android:paddingRight="60dp"
-        android:background="#123456"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <TextView
+        <com.move.widget.XFlowLayout
             android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#123456"
+            android:paddingBottom="20dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="60dp"
+            android:paddingTop="20dp"
+            app:h_space="0dp"
+            app:v_space="0dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="70sp"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hello"
+                android:textSize="40sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
+        </com.move.widget.XFlowLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="70sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="hello"
-            android:textSize="40sp"
-            android:layout_height="wrap_content" />
-
-    </com.move.widget.XFlowLayout>
+    </ScrollView>
 
 </RelativeLayout>
