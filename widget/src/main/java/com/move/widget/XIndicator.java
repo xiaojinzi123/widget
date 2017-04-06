@@ -319,6 +319,60 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
 
     }
 
+    //=======================Setter=========================start
+
+    public void setIndicatorWidth(int indicatorWidth) {
+        this.indicatorWidth = indicatorWidth;
+    }
+
+    public void setIndicatorHeight(int indicatorHeight) {
+        this.indicatorHeight = indicatorHeight;
+    }
+
+    public void setSelectedIndicatorWidth(int selectedIndicatorWidth) {
+        this.selectedIndicatorWidth = selectedIndicatorWidth;
+    }
+
+    public void setSelectedIndicatorHeight(int selectedIndicatorHeight) {
+        this.selectedIndicatorHeight = selectedIndicatorHeight;
+    }
+
+    public void setIndicatorHorizontalSpace(int indicatorHorizontalSpace) {
+        this.indicatorHorizontalSpace = indicatorHorizontalSpace;
+    }
+
+    public void setSelectedIndicatorColor(int selectedIndicatorColor) {
+        this.selectedIndicatorColor = selectedIndicatorColor;
+    }
+
+    public void setUnSelectedIndicatorColor(int unSelectedIndicatorColor) {
+        this.unSelectedIndicatorColor = unSelectedIndicatorColor;
+    }
+
+    public void setIndicatorCount(int indicatorCount) {
+        this.indicatorCount = indicatorCount;
+        offSet = 0f;
+        if (this.indicatorIndex > this.indicatorCount - 1) {
+            this.indicatorCount = this.indicatorCount - 1;
+        }
+        if (this.indicatorIndex < 0) {
+            this.indicatorIndex = 0;
+        }
+    }
+
+    public void setIndicatorIndex(int indicatorIndex) {
+        this.indicatorIndex = indicatorIndex;
+        offSet = 0f;
+        if (this.indicatorIndex > this.indicatorCount - 1) {
+            this.indicatorCount = this.indicatorCount - 1;
+        }
+        if (this.indicatorIndex < 0) {
+            this.indicatorIndex = 0;
+        }
+    }
+
+    //=======================Setter=========================end
+
     /**
      * dp的单位转换为px的
      *
@@ -343,4 +397,5 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
     @Override
     public void onPageScrollStateChanged(int state) {
     }
+
 }
