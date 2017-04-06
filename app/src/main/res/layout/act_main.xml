@@ -6,29 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.move.widgetdemo.MainAct">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.move.widget.XFlowLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#123456"
-            android:paddingBottom="20dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="60dp"
-            android:paddingTop="20dp"
-            app:h_space="0dp"
-            app:v_space="0dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="hello"
-                android:textSize="40sp" />
-
-        </com.move.widget.XFlowLayout>
-
-    </ScrollView>
+    <com.move.widget.XIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="8dp"
+        app:indicatorHeight="4dp"
+        app:count="5"
+        app:index="0"
+        app:indicatorColor="@color/colorAccent"
+        app:selectedIndicatorColor="@color/colorPrimaryDark"
+        app:indicatorSpace="4dp"
+        app:indicatorWidth="30dp"
+        app:selectedIndicatorHeight="10dp"
+        app:selectedIndicatorWidth="40dp" />
 
 </RelativeLayout>
