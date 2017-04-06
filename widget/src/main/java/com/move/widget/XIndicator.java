@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
@@ -17,7 +18,7 @@ import android.view.View;
  * 控件的设计只有包裹的效果,无论在什么情况下
  * 支持内边距设置
  */
-public class XIndicator extends View {
+public class XIndicator extends View implements ViewPager.OnPageChangeListener {
 
     public XIndicator(Context context) {
         this(context, null);
@@ -299,28 +300,23 @@ public class XIndicator extends View {
 
     /**
      * 和ViewPager的滑动事件绑定
+     * 此方法必须在ViewPager设置适配器之后
      *
      * @param vp
      */
     public void setUpViewPager(@NonNull ViewPager vp) {
-        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                indicatorIndex = position;
-                offSet = positionOffset;
-                postInvalidate();
-            }
 
-            @Override
-            public void onPageSelected(int position) {
+        PagerAdapter adapter = vp.getAdapter();
 
-            }
+        if (adapter != null) {
+            indicatorCount = adapter.getCount();
+        }
 
-            @Override
-            public void onPageScrollStateChanged(int state) {
+        indicatorIndex = vp.getCurrentItem();
 
-            }
-        });
+        vp.removeOnPageChangeListener(this);
+        vp.addOnPageChangeListener(this);
+
     }
 
     /**
@@ -333,4 +329,18 @@ public class XIndicator extends View {
         return Math.round(getResources().getDisplayMetrics().density * dps);
     }
 
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        indicatorIndex = position;
+        offSet = positionOffset;
+        postInvalidate();
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+    }
 }
