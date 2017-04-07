@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.move.widgetdemo.MainAct">
 
-    <com.move.widget.XIndicator
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:padding="8dp"
-        app:indicatorHeight="4dp"
-        app:count="5"
-        app:index="0"
-        app:indicatorColor="@color/colorAccent"
-        app:selectedIndicatorColor="@color/colorPrimaryDark"
-        app:indicatorSpace="4dp"
-        app:indicatorWidth="30dp"
-        app:selectedIndicatorHeight="10dp"
-        app:selectedIndicatorWidth="40dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:onClick="gotoIndicator"
+            android:text="横线指示器" />
+
+    </LinearLayout>
+
+</ScrollView>

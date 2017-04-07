@@ -226,8 +226,6 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
             c.drawRoundRect(r, radius, radius, p);
 
         }
-
-
     }
 
     /**
@@ -280,13 +278,20 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
 
         }
 
-        if (indicatorIndex != indicatorCount - 1) { // not the last one
+        // 这是就是根据偏移的百分比,在正常基础上左右偏移坐标
+        // 但是这里不针对选择的下标是最后一个的情况
 
+        if (indicatorIndex != indicatorCount - 1) {
+
+            // 拿到选中那个位置信息和选中的下一个的位置信息
             RectF rectFSelected = rectFs[indicatorIndex];
             RectF next = rectFs[indicatorIndex + 1];
 
+            // 计算两者的偏移量
             float selectedOffsetPx = (next.right - rectFSelected.right) * offSet;
             float nextOffsetPx = (rectFSelected.left - next.left) * offSet;
+
+            // 在原来的基础上加上偏移量
 
             rectFSelected.left += selectedOffsetPx;
             rectFSelected.right += selectedOffsetPx;
@@ -305,6 +310,18 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
      * @param vp
      */
     public void setUpViewPager(@NonNull ViewPager vp) {
+        setUpViewPager(vp, false);
+    }
+
+
+    /**
+     * 和ViewPager的滑动事件绑定
+     * 此方法必须在ViewPager设置适配器之后
+     *
+     * @param vp
+     * @param isReLayout 是否重新测量自己
+     */
+    public void setUpViewPager(@NonNull ViewPager vp, boolean isReLayout) {
 
         PagerAdapter adapter = vp.getAdapter();
 
@@ -317,39 +334,63 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
         vp.removeOnPageChangeListener(this);
         vp.addOnPageChangeListener(this);
 
+        //需要重新测量自己哦
+        requestLayout();
+
     }
 
     //=======================Setter=========================start
 
-    public void setIndicatorWidth(int indicatorWidth) {
+    public void setIndicatorWidth(int indicatorWidth,boolean isReLayout) {
         this.indicatorWidth = indicatorWidth;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setIndicatorHeight(int indicatorHeight) {
+    public void setIndicatorHeight(int indicatorHeight,boolean isReLayout) {
         this.indicatorHeight = indicatorHeight;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setSelectedIndicatorWidth(int selectedIndicatorWidth) {
+    public void setSelectedIndicatorWidth(int selectedIndicatorWidth,boolean isReLayout) {
         this.selectedIndicatorWidth = selectedIndicatorWidth;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setSelectedIndicatorHeight(int selectedIndicatorHeight) {
+    public void setSelectedIndicatorHeight(int selectedIndicatorHeight,boolean isReLayout) {
         this.selectedIndicatorHeight = selectedIndicatorHeight;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setIndicatorHorizontalSpace(int indicatorHorizontalSpace) {
+    public void setIndicatorHorizontalSpace(int indicatorHorizontalSpace,boolean isReLayout) {
         this.indicatorHorizontalSpace = indicatorHorizontalSpace;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setSelectedIndicatorColor(int selectedIndicatorColor) {
+    public void setSelectedIndicatorColor(int selectedIndicatorColor,boolean isReLayout) {
         this.selectedIndicatorColor = selectedIndicatorColor;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setUnSelectedIndicatorColor(int unSelectedIndicatorColor) {
+    public void setUnSelectedIndicatorColor(int unSelectedIndicatorColor,boolean isReLayout) {
         this.unSelectedIndicatorColor = unSelectedIndicatorColor;
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setIndicatorCount(int indicatorCount) {
+    public void setIndicatorCount(int indicatorCount,boolean isReLayout) {
         this.indicatorCount = indicatorCount;
         offSet = 0f;
         if (this.indicatorIndex > this.indicatorCount - 1) {
@@ -358,9 +399,12 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
         if (this.indicatorIndex < 0) {
             this.indicatorIndex = 0;
         }
+        if (isReLayout) {
+            requestLayout();
+        }
     }
 
-    public void setIndicatorIndex(int indicatorIndex) {
+    public void setIndicatorIndex(int indicatorIndex,boolean isReLayout) {
         this.indicatorIndex = indicatorIndex;
         offSet = 0f;
         if (this.indicatorIndex > this.indicatorCount - 1) {
@@ -368,6 +412,9 @@ public class XIndicator extends View implements ViewPager.OnPageChangeListener {
         }
         if (this.indicatorIndex < 0) {
             this.indicatorIndex = 0;
+        }
+        if (isReLayout) {
+            requestLayout();
         }
     }
 
