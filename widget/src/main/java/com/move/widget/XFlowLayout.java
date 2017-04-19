@@ -33,6 +33,7 @@ public class XFlowLayout extends ViewGroup {
 
         mHSpace = a.getDimensionPixelSize(R.styleable.XFlowLayout_h_space, dpToPx(10));
         mVSpace = a.getDimensionPixelSize(R.styleable.XFlowLayout_v_space, dpToPx(10));
+        mMaxLines = a.getInt(R.styleable.XFlowLayout_maxlines, -1);
 
         a.recycle();
 
@@ -59,6 +60,9 @@ public class XFlowLayout extends ViewGroup {
         //初始化值
         int left = getPaddingLeft(), top = getPaddingTop();
 
+        // 几行
+        int lines = 1;
+
         //循环所有的孩子
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -66,9 +70,14 @@ public class XFlowLayout extends ViewGroup {
 
             if (left != getPaddingLeft()) { //是否是一行的开头
                 if ((left + view.getMeasuredWidth()) > sizeWidth - getPaddingRight()) { //需要换行了,因为放不下啦
+                    // 如果到了最大的行数,就跳出,top就是当前的
+                    if (mMaxLines != -1 && mMaxLines <= lines) {
+                        break;
+                    }
                     //计算出下一行的top
                     top += mChildMaxHeight + mVSpace;
                     left = getPaddingLeft();
+                    lines++;
                 }
             }
 
@@ -86,6 +95,11 @@ public class XFlowLayout extends ViewGroup {
         }
 
     }
+
+    /**
+     * -1表示不限制,最多显示几行
+     */
+    private int mMaxLines = -1;
 
     /**
      * 孩子中最高的一个
@@ -112,6 +126,9 @@ public class XFlowLayout extends ViewGroup {
         //初始化值
         int left = getPaddingLeft(), top = getPaddingTop();
 
+        // 几行
+        int lines = 1;
+
         //循环所有的孩子
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
@@ -119,9 +136,14 @@ public class XFlowLayout extends ViewGroup {
 
             if (left != getPaddingLeft()) { //是否是一行的开头
                 if ((left + view.getMeasuredWidth()) > getWidth() - getPaddingRight()) { //需要换行了,因为放不下啦
+                    // 如果到了最大的行数,就跳出,top就是当前的
+                    if (mMaxLines != -1 && mMaxLines <= lines) {
+                        break;
+                    }
                     //计算出下一行的top
                     top += mChildMaxHeight + mVSpace;
                     left = getPaddingLeft();
+                    lines++;
                 }
             }
 
