@@ -83,6 +83,20 @@
 
         </com.move.widget.XFlowLayout>
 
+        <com.move.widget.RelativeSizeTextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="hello"
+            android:textSize="40sp"
+            app:endText="world"
+            app:end_proportion="1.5"
+            app:start_end_text_color="#FF00FF"
+            app:end_text_color="#0000FF"
+            app:proportion="0.8"
+            app:startText="hello" />
+
     </LinearLayout>
 
 

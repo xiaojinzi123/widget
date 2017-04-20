@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RelativeSizeTextView">
+
+        <!--开头和结束的文本-->
+        <attr name="startText" format="string" />
+        <attr name="endText" format="string" />
+        <!--统一设置开头和结束的tag的比例-->
+        <attr name="proportion" format="float" />
+        <!--开头的文本的比例-->
+        <attr name="start_proportion" format="float" />
+        <!--结束的文本的比例-->
+        <attr name="end_proportion" format="float" />
+        <!--开始文本和结束文本的颜色-->
+        <attr name="start_end_text_color" format="color" />
+        <attr name="start_text_color" format="color" />
+        <attr name="end_text_color" format="color" />
+
+    </declare-styleable>
+</resources>
