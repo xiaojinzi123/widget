@@ -88,7 +88,7 @@ public class RelativeSizeTextView extends AppCompatTextView {
     public void setTagText(CharSequence text) {
 
         if (!TextUtils.isEmpty(startText)) {
-            text = endText + text;
+            text = startText + text;
         }
 
         if (!TextUtils.isEmpty(endText)) {
