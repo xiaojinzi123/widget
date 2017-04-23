@@ -21,6 +21,7 @@
         <com.move.widget.XFlowLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
             android:background="@color/colorPrimary"
             android:padding="10dp"
             app:maxlines="2">
@@ -88,14 +89,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="hello"
-            android:textSize="40sp"
-            app:endText="world"
+            android:text="我是正常文本20sp"
+            android:textSize="20sp"
+            app:endText="我是蓝色后置文本为正常大小的150%"
             app:end_proportion="1.5"
-            app:start_end_text_color="#FF00FF"
             app:end_text_color="#0000FF"
-            app:proportion="0.8"
-            app:startText="hello" />
+            app:start_proportion="0.8"
+            app:startText="我是前置红色文本为正常大小的80%"
+            app:start_text_color="#FF0000" />
 
     </LinearLayout>
 

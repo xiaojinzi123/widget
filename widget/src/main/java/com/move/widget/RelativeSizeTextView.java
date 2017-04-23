@@ -85,6 +85,13 @@ public class RelativeSizeTextView extends AppCompatTextView {
      */
     private float endProportion;
 
+    /**
+     * 设置文本,调用的时候不要调用{@link android.widget.TextView#setText(CharSequence)}方法
+     * 而是调用此方法,不然没有效果
+     * 比如setTagText("hello") 输出效果为加上前置文本和后置文本:<前置文本>hello<后置文本>
+     *
+     * @param text
+     */
     public void setTagText(CharSequence text) {
 
         if (!TextUtils.isEmpty(startText)) {
@@ -101,22 +108,20 @@ public class RelativeSizeTextView extends AppCompatTextView {
 
         if (!TextUtils.isEmpty(startText)) {
             ss.setSpan(startSpan, 0, startText.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        }
-
-        if (startTextColor != 0) {
-            ForegroundColorSpan fcs = new ForegroundColorSpan(startTextColor);
-            ss.setSpan(fcs, 0, startText.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            if (startTextColor != 0) {
+                ForegroundColorSpan fcs = new ForegroundColorSpan(startTextColor);
+                ss.setSpan(fcs, 0, startText.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            }
         }
 
         if (!TextUtils.isEmpty(endText)) {
             ss.setSpan(endSpan, text.length() - endText.length(), text.length(),
                     Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-        }
-
-        if (endTextColor != 0) {
-            ForegroundColorSpan fcs = new ForegroundColorSpan(endTextColor);
-            ss.setSpan(fcs, text.length() - endText.length(), text.length(),
-                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            if (endTextColor != 0) {
+                ForegroundColorSpan fcs = new ForegroundColorSpan(endTextColor);
+                ss.setSpan(fcs, text.length() - endText.length(), text.length(),
+                        Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+            }
         }
 
         super.setText(ss);
