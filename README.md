@@ -42,5 +42,5 @@ compile 'com.github.xiaojinzi123:widget:v1.1.4.1'
             app:start_text_color="#FF0000" />
 ```
 
-####result
+#### result
 ![](./imgs/1.png)
