@@ -42,5 +42,4 @@ compile 'com.github.xiaojinzi123:widget:v1.1.4.1'
 ```
 
 result
-
-![这里写图片描述](../imgs/1.png)
+![](./imgs/1.png)
