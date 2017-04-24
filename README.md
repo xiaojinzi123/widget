@@ -2,7 +2,7 @@
 common widget for Android
 
 
-#how to use
+## how to use
 
 edit your main build.gradle file
 
@@ -21,9 +21,10 @@ add dependencies to your module build.gralde
 compile 'com.github.xiaojinzi123:widget:v1.1.4.1'
 ```
 
-#I will introduce all usage of weiget
+## I will introduce all usage of weiget
 
-##RelativeSizeTextView
+### RelativeSizeTextView
+#### use
 
 ```
 <com.move.widget.RelativeSizeTextView
@@ -41,5 +42,5 @@ compile 'com.github.xiaojinzi123:widget:v1.1.4.1'
             app:start_text_color="#FF0000" />
 ```
 
-result
+####result
 ![](./imgs/1.png)
