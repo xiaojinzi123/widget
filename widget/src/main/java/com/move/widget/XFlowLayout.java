@@ -43,18 +43,17 @@ public class XFlowLayout extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
+        // 拿到父容器推荐的宽和高以及计算模式
+
         int sizeWidth = MeasureSpec.getSize(widthMeasureSpec);
         int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
         int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
 
-//        int mWidthMeasureSpec = MeasureSpec.makeMeasureSpec(sizeWidth, modeWidth);
-//        int mHeightMeasureSpec = MeasureSpec.makeMeasureSpec(sizeHeight, modeHeight);
-
         //测量孩子的大小
         measureChildren(widthMeasureSpec, heightMeasureSpec);
 
-        //寻找孩子中最高的一个孩子
+        //寻找孩子中最高的一个孩子,找到的值会放在mChildMaxHeight变量中
         findMaxChildMaxHeight();
 
         //初始化值
@@ -108,11 +107,13 @@ public class XFlowLayout extends ViewGroup {
 
     /**
      * 每一个孩子的左右的间距
+     * 20是默认值,单位是px
      */
     private int mHSpace = 20;
 
     /**
      * 每一行的上下的间距
+     * 20是默认值,单位是px
      */
     private int mVSpace = 20;
 
@@ -147,8 +148,10 @@ public class XFlowLayout extends ViewGroup {
                 }
             }
 
+            int dy = (mChildMaxHeight - view.getMeasuredHeight()) / 2;
+
             //安排孩子的位置
-            view.layout(left, top, left + view.getMeasuredWidth(), top + mChildMaxHeight);
+            view.layout(left, top + dy, left + view.getMeasuredWidth(), top + view.getMeasuredHeight() + dy);
 
             left += view.getMeasuredWidth() + mHSpace;
 
@@ -187,4 +190,5 @@ public class XFlowLayout extends ViewGroup {
     public void setVSpace(int vSpace) {
         this.mVSpace = vSpace;
     }
+
 }

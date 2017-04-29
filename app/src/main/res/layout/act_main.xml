@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="100dp"
-            android:background="@color/colorPrimary"
+            android:background="#789"
             android:padding="10dp"
             app:maxlines="2">
 
@@ -31,55 +31,16 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
                 android:text="hello"
+                android:gravity="center"
                 android:textColor="#FFFFFF" />
 
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorAccent"
+                android:padding="10dp"
                 android:text="hello"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="hello"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="hello"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="hello"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="hello"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="hello"
-                android:textColor="#FFFFFF" />
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:background="@color/colorAccent"
-                android:text="hello"
+                android:gravity="center"
                 android:textColor="#FFFFFF" />
 
         </com.move.widget.XFlowLayout>
