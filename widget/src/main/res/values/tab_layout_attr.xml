@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--配置指示器的属性-->
+    <declare-styleable name="TabLayout">
+        <attr name="tl_indicatorColor" format="color" /><!-- 未选中的指示器的颜色 -->
+        <attr name="tl_selectedIndicatorColor" format="color" /><!-- 选中的指示器颜色 -->
+        <!--指示器的宽和高-->
+        <attr name="tl_indicatorWidth" format="dimension" />
+        <attr name="tl_indicatorHeight" format="dimension" />
+        <!--横向的间距-->
+        <attr name="tl_indicatorSpace" format="dimension" />
+        <!--选中的指示器的宽高-->
+        <attr name="tl_selectedIndicatorWidth" format="dimension" />
+        <attr name="tl_selectedIndicatorHeight" format="dimension" />
+        <!--下标-->
+        <attr name="tl_index" format="integer" />
+    </declare-styleable>
+</resources>

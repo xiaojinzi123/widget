@@ -2,7 +2,6 @@ package com.move.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -86,6 +85,11 @@ public class RelativeSizeTextView extends AppCompatTextView {
     private float endProportion;
 
     /**
+     * 原来的文本
+     */
+    private CharSequence originText;
+
+    /**
      * 设置文本,调用的时候不要调用{@link android.widget.TextView#setText(CharSequence)}方法
      * 而是调用此方法,不然没有效果
      * 比如setTagText("hello") 输出效果为加上前置文本和后置文本:<前置文本>hello<后置文本>
@@ -93,6 +97,12 @@ public class RelativeSizeTextView extends AppCompatTextView {
      * @param text
      */
     public void setTagText(CharSequence text) {
+
+        if (text == null) {
+            return;
+        }
+
+        originText = text;
 
         if (!TextUtils.isEmpty(startText)) {
             text = startText + text;
@@ -127,4 +137,61 @@ public class RelativeSizeTextView extends AppCompatTextView {
         super.setText(ss);
     }
 
+    public void setStartText(String startText) {
+        this.startText = startText;
+        setTagText(originText);
+    }
+
+    public void setStartTextColor(int startTextColor) {
+        this.startTextColor = startTextColor;
+        setTagText(originText);
+    }
+
+    public void setEndText(String endText) {
+        this.endText = endText;
+        setTagText(originText);
+    }
+
+    public void setEndTextColor(int endTextColor) {
+        this.endTextColor = endTextColor;
+        setTagText(originText);
+    }
+
+    public void setStartProportion(float startProportion) {
+        this.startProportion = startProportion;
+        setTagText(originText);
+    }
+
+    public void setEndProportion(float endProportion) {
+        this.endProportion = endProportion;
+        setTagText(originText);
+    }
+
+    public String getStartText() {
+        return startText;
+    }
+
+    public int getStartTextColor() {
+        return startTextColor;
+    }
+
+    public String getEndText() {
+        return endText;
+    }
+
+    public int getEndTextColor() {
+        return endTextColor;
+    }
+
+    public float getStartProportion() {
+        return startProportion;
+    }
+
+    public float getEndProportion() {
+        return endProportion;
+    }
+
+    public CharSequence getOriginText() {
+        return originText;
+    }
 }
