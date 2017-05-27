@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StateView1">
+
+        <!--小圆点的空心的时候的宽度和颜色和实心的时候的颜色-->
+        <attr name="sv1_circle_border_width" format="dimension" />
+        <attr name="sv1_circle_color" format="color" />
+        <attr name="sv1_circle_selected_color" format="color" />
+        <attr name="sv1_circle_radius" format="dimension" />
+
+        <!--线条的选中和没有选中的颜色和距离圆点的边距-->
+        <attr name="sv1_line_color" format="color" />
+        <attr name="sv1_line_selected_color" format="color" />
+        <attr name="sv1_line_height" format="dimension" />
+        <attr name="sv1_line_margin" format="dimension" />
+
+        <!--文字的选中和非选中的颜色和大小-->
+        <attr name="sv1_text_size" format="integer" />
+        <attr name="sv1_text_color" format="color" />
+        <attr name="sv1_text_selected_color" format="color" />
+
+        <!--横向和竖向的间距-->
+        <attr name="sv1_horizontal_space" format="dimension" />
+        <attr name="sv1_vertical_space" format="dimension" />
+
+        <attr name="sv1_data" format="reference" />
+        <attr name="sv1_progress" format="integer" />
+
+    </declare-styleable>
+
+</resources>

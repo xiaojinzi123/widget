@@ -59,28 +59,30 @@
             app:start_proportion="0.8"
             app:start_text_color="#FF0000" />
 
-        <!--选项卡-->
-        <com.move.widget.TabLayout
-            android:layout_width="match_parent"
-            android:paddingLeft="10dp"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="哈哈哈哈" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="哈哈哈哈" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="哈哈哈哈" />
-
-        </com.move.widget.TabLayout>
+        <com.move.widget.StateView1
+            android:id="@+id/sv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:paddingBottom="12dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            app:sv1_circle_border_width="2dp"
+            app:sv1_circle_color="#0000FF"
+            app:sv1_circle_radius="8dp"
+            app:sv1_circle_selected_color="#FF0000"
+            app:sv1_data="@array/test"
+            app:sv1_horizontal_space="30dp"
+            app:sv1_line_color="#00FFFF"
+            app:sv1_line_height="6dp"
+            app:sv1_line_margin="6dp"
+            app:sv1_line_selected_color="#000000"
+            app:sv1_progress="-1"
+            app:sv1_text_color="#FF0000"
+            app:sv1_text_selected_color="#0000FF"
+            app:sv1_text_size="18"
+            app:sv1_vertical_space="10dp" />
 
     </LinearLayout>
 
