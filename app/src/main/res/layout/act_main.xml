@@ -67,22 +67,14 @@
             android:paddingBottom="12dp"
             android:paddingLeft="20dp"
             android:paddingRight="10dp"
+            app:sv1_horizontal_space="20dp"
             android:paddingTop="10dp"
+            app:sv1_text_size="24"
+            app:sv1_line_height="3dp"
             app:sv1_circle_border_width="2dp"
-            app:sv1_circle_color="#0000FF"
-            app:sv1_circle_radius="8dp"
-            app:sv1_circle_selected_color="#FF0000"
+            app:sv1_circle_radius="6dp"
             app:sv1_data="@array/test"
-            app:sv1_horizontal_space="30dp"
-            app:sv1_line_color="#00FFFF"
-            app:sv1_line_height="6dp"
-            app:sv1_line_margin="6dp"
-            app:sv1_line_selected_color="#000000"
-            app:sv1_progress="-1"
-            app:sv1_text_color="#FF0000"
-            app:sv1_text_selected_color="#0000FF"
-            app:sv1_text_size="18"
-            app:sv1_vertical_space="10dp" />
+            app:sv1_progress="1" />
 
     </LinearLayout>
 

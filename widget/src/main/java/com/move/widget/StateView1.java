@@ -68,6 +68,7 @@ public class StateView1 extends ViewGroup {
      * @param context
      */
     private void init(Context context) {
+        linePaint.setStrokeWidth(lineHeight);
     }
 
     @Override
@@ -233,7 +234,7 @@ public class StateView1 extends ViewGroup {
             for (int i = 0; i < arr.length - childCount; i++) {
                 TextView tv = new TextView(getContext());
                 tv.setLayoutParams(new LayoutParams(
-                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT
+                        LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT
                 ));
                 addView(tv);
             }
