@@ -80,8 +80,8 @@ public class StateView1 extends ViewGroup {
         int sizeHeight = MeasureSpec.getSize(heightMeasureSpec);
 
         measureChildren(
-                MeasureSpec.makeMeasureSpec(sizeWidth, MeasureSpec.AT_MOST),
-                MeasureSpec.makeMeasureSpec(sizeHeight, MeasureSpec.AT_MOST)
+                MeasureSpec.makeMeasureSpec(sizeWidth, MeasureSpec.UNSPECIFIED),
+                MeasureSpec.makeMeasureSpec(sizeHeight, MeasureSpec.UNSPECIFIED)
         );
 
         int width = 0;
