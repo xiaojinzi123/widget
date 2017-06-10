@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">WidgetDemo</string>
     <array name="test" >
-        <item>123</item>
-        <item>小金子</item>
-        <item>达叔</item>
+        <item>小金子小金子</item>
+        <item>小金子达叔</item>
+        <item>达叔小金子</item>
     </array>
 </resources>

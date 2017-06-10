@@ -5,6 +5,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -15,42 +16,42 @@ import android.widget.TextView;
  * Created by cxj on 2017/5/27.
  * 类似于显示物流信息的控件,但是这个是水平显示的
  */
-public class StateView1 extends ViewGroup {
+public class StepView2 extends ViewGroup {
 
-    public StateView1(Context context) {
+    public StepView2(Context context) {
         this(context, null);
     }
 
-    public StateView1(Context context, AttributeSet attrs) {
+    public StepView2(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public StateView1(Context context, AttributeSet attrs, int defStyleAttr) {
+    public StepView2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         // 读取自定义属性
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.StateView1);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.StepView2);
 
-        hSpace = a.getDimensionPixelOffset(R.styleable.StateView1_sv1_horizontal_space, dpToPx(10));
-        vSpace = a.getDimensionPixelOffset(R.styleable.StateView1_sv1_vertical_space, dpToPx(2));
+        hSpace = a.getDimensionPixelOffset(R.styleable.StepView2_sv2_horizontal_space, dpToPx(10));
+        vSpace = a.getDimensionPixelOffset(R.styleable.StepView2_sv2_vertical_space, dpToPx(2));
 
-        textSize = a.getInt(R.styleable.StateView1_sv1_text_size, 16);
-        unSelectedTextColor = a.getColor(R.styleable.StateView1_sv1_text_color, Color.GREEN);
-        selectedTextColor = a.getColor(R.styleable.StateView1_sv1_text_selected_color, Color.GRAY);
+        textSize = a.getInt(R.styleable.StepView2_sv2_text_size, 16);
+        unSelectedTextColor = a.getColor(R.styleable.StepView2_sv2_text_color, Color.GREEN);
+        selectedTextColor = a.getColor(R.styleable.StepView2_sv2_text_selected_color, Color.GRAY);
 
-        circleBorderWidth = a.getDimensionPixelOffset(R.styleable.StateView1_sv1_circle_border_width, dpToPx(4));
-        circleRadius = a.getDimensionPixelOffset(R.styleable.StateView1_sv1_circle_radius, dpToPx(8));
-        unSelectedCircleColor = a.getColor(R.styleable.StateView1_sv1_circle_color, Color.GREEN);
-        selectedCircleColor = a.getColor(R.styleable.StateView1_sv1_circle_selected_color, Color.GRAY);
+        stateDrawable = a.getDrawable(R.styleable.StepView2_sv2_state_drawable);
+        stateSelectedDrawable = a.getDrawable(R.styleable.StepView2_sv2_state_selected_drawable);
+        stateWidth = a.getDimensionPixelOffset(R.styleable.StepView2_sv2_state_size, dpToPx(16));
+        stateHeight = a.getDimensionPixelOffset(R.styleable.StepView2_sv2_state_size, dpToPx(16));
 
-        lineHeight = a.getDimensionPixelOffset(R.styleable.StateView1_sv1_line_height, dpToPx(2));
-        lineMargin = a.getDimensionPixelOffset(R.styleable.StateView1_sv1_line_margin, dpToPx(4));
-        unSelectedLineColor = a.getColor(R.styleable.StateView1_sv1_line_color, Color.GREEN);
-        selectedLineColor = a.getColor(R.styleable.StateView1_sv1_line_selected_color, Color.GRAY);
+        lineHeight = a.getDimensionPixelOffset(R.styleable.StepView2_sv2_line_height, dpToPx(2));
+        lineMargin = a.getDimensionPixelOffset(R.styleable.StepView2_sv2_line_margin, dpToPx(4));
+        unSelectedLineColor = a.getColor(R.styleable.StepView2_sv2_line_color, Color.GREEN);
+        selectedLineColor = a.getColor(R.styleable.StepView2_sv2_line_selected_color, Color.GRAY);
 
-        progress = a.getInt(R.styleable.StateView1_sv1_progress, -1);
+        progress = a.getInt(R.styleable.StepView2_sv2_progress, -1);
 
-        int resourceId = a.getResourceId(R.styleable.StateView1_sv1_data, -1);
+        int resourceId = a.getResourceId(R.styleable.StepView2_sv2_data, -1);
         if (resourceId != -1) {
             String[] strings = getResources().getStringArray(resourceId);
             disPlay(strings, progress);
@@ -90,13 +91,16 @@ public class StateView1 extends ViewGroup {
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
             View view = getChildAt(i);
-            width += view.getMeasuredWidth() + hSpace;
+            width += view.getMeasuredWidth();
+            if (i > 0) {
+                width += hSpace;
+            }
             if (view.getMeasuredHeight() > height) {
                 height = view.getMeasuredHeight();
             }
         }
 
-        height += circleRadius * 2 + vSpace + circleBorderWidth;
+        height += stateHeight + vSpace;
 
         // 加上内边距
 
@@ -121,46 +125,80 @@ public class StateView1 extends ViewGroup {
             View view = getChildAt(i);
 
             float centerX = (view.getLeft() + view.getRight()) / 2;
-            float centerY = top + view.getMeasuredHeight() + circleRadius + vSpace;
+            float centerY = top + view.getMeasuredHeight() + stateHeight / 2 + vSpace;
 
             if (i > 0) {
                 view = getChildAt(i - 1);
                 float preCenterX = (view.getLeft() + view.getRight()) / 2;
-                float preCenterY = top + view.getMeasuredHeight() + circleRadius + vSpace;
+                float preCenterY = top + view.getMeasuredHeight() + stateHeight / 2 + vSpace;
                 if (i <= progress) {
                     linePaint.setColor(selectedLineColor);
                 } else {
                     linePaint.setColor(unSelectedLineColor);
                 }
-                c.drawLine(
-                        preCenterX + circleRadius + lineMargin,
-                        preCenterY, centerX - circleRadius - lineMargin,
-                        centerY, linePaint
-                );
+                if (i == progress + 1) {
+                    linePaint.setColor(selectedLineColor);
+                    c.drawLine(
+                            preCenterX + stateWidth / 2 + lineMargin,
+                            preCenterY,
+                            (centerX + preCenterX) / 2,
+                            centerY,
+                            linePaint
+                    );
+                    linePaint.setColor(unSelectedLineColor);
+                    c.drawLine(
+                            (centerX + preCenterX) / 2,
+                            preCenterY,
+                            centerX - stateWidth / 2 - lineMargin,
+                            centerY,
+                            linePaint
+                    );
+                } else {
+                    c.drawLine(
+                            preCenterX + stateWidth / 2 + lineMargin,
+                            preCenterY,
+                            centerX - stateWidth / 2 - lineMargin,
+                            centerY,
+                            linePaint
+                    );
+                }
+
             }
 
 
         }
 
-        // 绘制圆点
+        // 绘制背景
 
         for (int i = 0; i < childCount; i++) {
 
             View view = getChildAt(i);
 
             float centerX = (view.getLeft() + view.getRight()) / 2;
-            float centerY = top + view.getMeasuredHeight() + circleRadius + vSpace;
+            float centerY = top + view.getMeasuredHeight() + stateHeight / 2 + vSpace;
 
-            if (i <= progress) {
-                circlePaint.setStyle(Paint.Style.FILL);
-                circlePaint.setColor(selectedCircleColor);
-                circlePaint.setStrokeWidth(circleBorderWidth);
-                c.drawCircle(centerX, centerY, circleRadius + (circleBorderWidth / 2), circlePaint);
+            if (i <= progress) { // 绘制选中的
+                if (stateSelectedDrawable == null) {
+                    continue;
+                }
+                stateSelectedDrawable.setBounds(
+                        ((int) (centerX - stateWidth / 2)),
+                        ((int) (centerY - stateHeight / 2)),
+                        ((int) (centerX + stateWidth / 2)),
+                        ((int) (centerY + stateHeight / 2))
+                );
+                stateSelectedDrawable.draw(c);
             } else {
-                circlePaint.setStyle(Paint.Style.STROKE);
-                circlePaint.setColor(unSelectedCircleColor);
-                circlePaint.setStrokeWidth(circleBorderWidth);
-                c.drawCircle(centerX, centerY, circleRadius, circlePaint);
+                if (stateDrawable == null) {
+                    continue;
+                }
+                stateDrawable.setBounds(
+                        ((int) (centerX - stateWidth / 2)),
+                        ((int) (centerY - stateHeight / 2)),
+                        ((int) (centerX + stateWidth / 2)),
+                        ((int) (centerY + stateHeight / 2))
+                );
+                stateDrawable.draw(c);
             }
 
         }
@@ -183,7 +221,6 @@ public class StateView1 extends ViewGroup {
 
     }
 
-    private Paint circlePaint = new Paint();
     private Paint linePaint = new Paint();
 
     // 一些颜色信息
@@ -192,10 +229,10 @@ public class StateView1 extends ViewGroup {
     private int unSelectedTextColor = Color.GRAY;
     private int textSize;
 
-    private int selectedCircleColor = Color.GREEN;
-    private int unSelectedCircleColor = Color.GRAY;
-    private int circleBorderWidth;
-    private int circleRadius;
+    private Drawable stateDrawable = null;
+    private Drawable stateSelectedDrawable = null;
+    private int stateWidth;
+    private int stateHeight;
 
     private int selectedLineColor = Color.GREEN;
     private int unSelectedLineColor = Color.GRAY;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="StateView1">
+    <declare-styleable name="StepView1">
 
         <!--小圆点的空心的时候的宽度和颜色和实心的时候的颜色-->
         <attr name="sv1_circle_border_width" format="dimension" />
