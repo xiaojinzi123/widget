@@ -193,7 +193,6 @@ public class OverScrollerView extends ViewGroup {
     public boolean onTouchEvent(MotionEvent e) {
 
         if (isFinishing) {
-            contentView.dispatchTouchEvent(e);
             return true;
         }
 
@@ -305,6 +304,7 @@ public class OverScrollerView extends ViewGroup {
                 }
                 isHeaderFreshing = false;
             }
+            isFinishing = false;
         }
     }
 
