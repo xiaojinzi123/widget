@@ -126,32 +126,7 @@ public class OverScrollerView extends ViewGroup {
                 dy = mScrollY;
             }
 
-            if (mScrollY < 0 && headerView != null) { // 如果是头部显示出来了
-                // 计算headerView 显示出来的比例
-
-                // 是一个正数
-                int headerHeight = headerView.getHeight();
-                float mFloatScrollY = Math.abs(mScrollY + 0f);
-                if (mFloatScrollY > headerHeight) {
-                    if (!isHeaderFreshing) {
-                        if (!isHeaderPreFreshing && iHeaderView != null) {
-                            // 准备刷新肯定已经是headerView整个都出现了
-                            iHeaderView.onPull(1f);
-                            iHeaderView.onPreRefresh();
-                        }
-                        isHeaderPreFreshing = true;
-                    }
-                } else {
-                    if (!isHeaderFreshing) {
-                        if (headerHeight > 0) {
-                            if (iHeaderView != null) {
-                                iHeaderView.onPull(Math.min(1, mFloatScrollY / headerHeight));
-                            }
-                        }
-                        isHeaderPreFreshing = false;
-                    }
-                }
-            }
+            dispatchListener();
 
             scrollBy(0, -dy);
 
@@ -167,7 +142,7 @@ public class OverScrollerView extends ViewGroup {
             }
 
             // 如果要刷新了
-            if (getScrollY() <= -headerView.getHeight()) {
+            if (!isFinishing && getScrollY() <= -headerView.getHeight()) {
                 smothTo(-headerView.getHeight());
                 if (!isHeaderFreshing) { // 如果没在刷新的,回调方法,保证只调用一次
                     if (iHeaderView != null) {
@@ -191,10 +166,6 @@ public class OverScrollerView extends ViewGroup {
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-
-        if (isFinishing) {
-            return true;
-        }
 
         dragHelper.processTouchEvent(e);
 
@@ -298,29 +269,77 @@ public class OverScrollerView extends ViewGroup {
     public void computeScroll() {
         super.computeScroll();
         if (getScrollY() >= 0) { // 表示header不可见了
-            if (isHeaderFreshing) { // 如果此时是正在刷新header的,那么就代表取消这次刷新了
-                if (iHeaderView != null) {
-                    iHeaderView.cancelFresh();
-                }
-                isHeaderFreshing = false;
-            }
-            isFinishing = false;
+            if (isHeaderFreshing) ;
         }
     }
 
-
     /**
-     * 是否孩子可以往下滑动
-     *
-     * @param mTarget
-     * @return
+     * 根据现在的滚动的dy,智能调用回调方法
      */
-    public boolean canChildScrollDown(View mTarget) {
-        return mTarget.canScrollVertically(-1);
-    }
+    private void dispatchListener() {
 
-    public boolean canChildScrollUp(View mTarget) {
-        return mTarget.canScrollVertically(1);
+        if (headerView == null || iHeaderView == null) {
+            return;
+        }
+
+        int mScrollY = getScrollY();
+
+        if (mScrollY >= 0) { // 如果整个Header 已经不见了
+            if (isHeaderFreshing) { // 如果此时是正在刷新的状态,需要取消
+                iHeaderView.onCancelFresh();
+                isHeaderFreshing = false;
+            }
+            return;
+        }
+
+        if (isFinishing) {
+            return;
+        }
+
+
+        // 计算headerView 显示出来的比例
+
+        // 是一个正数
+        int headerHeight = headerView.getHeight();
+        // 得到滚动的绝对值
+        float mFloatScrollY = Math.abs(mScrollY + 0f);
+
+        if (mFloatScrollY > headerHeight) { // 如果当前滚动的距离已经超过了Header的高度,说明已经是准备刷新的状态
+
+            if (isHeaderFreshing) { // 如果已经是刷新的状态了
+                return;
+            }
+            if (isHeaderPreFreshing) { // 如果已经是准备刷新的状态了
+                return;
+            }
+
+            // 准备刷新肯定已经是headerView整个都出现了,所以调用一下显示100%状态的
+            iHeaderView.onPull(1f);
+            // 紧接着调用准备刷新
+            iHeaderView.onPreRefresh();
+
+            // 标记准备刷新
+            isHeaderPreFreshing = true;
+
+        } else { // 如果滚动的距离还没有超过Header的高度
+
+            if (isHeaderFreshing) { // 如果已经是刷新的状态了
+                return;
+            }
+
+            // 取消准备刷新的状态
+            isHeaderPreFreshing = false;
+
+            if (headerHeight <= 0) {
+                return;
+            }
+
+            // 通知当前拖拽的程度
+            iHeaderView.onPull(Math.min(1, mFloatScrollY / headerHeight));
+
+        }
+
+
     }
 
     /**
@@ -345,6 +364,14 @@ public class OverScrollerView extends ViewGroup {
         objectAnimator.start();
     }
 
+    private boolean canChildScrollDown(View mTarget) {
+        return mTarget.canScrollVertically(-1);
+    }
+
+    private boolean canChildScrollUp(View mTarget) {
+        return mTarget.canScrollVertically(1);
+    }
+
     private IHeaderView iHeaderView;
 
     private boolean isFinishing;
@@ -353,6 +380,10 @@ public class OverScrollerView extends ViewGroup {
      * end fresh
      */
     public void finishRefresh() {
+
+        if (!isHeaderFreshing) { // 如果已经被取消掉了
+            return;
+        }
 
         isHeaderPulling = false;
         isFootPulling = false;
@@ -426,7 +457,7 @@ public class OverScrollerView extends ViewGroup {
         /**
          * cancel reFresh
          */
-        void cancelFresh();
+        void onCancelFresh();
 
         /**
          * finish reFresh
