@@ -2,6 +2,8 @@ package com.move.widget;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
@@ -344,7 +346,7 @@ public class OverScrollerView extends ViewGroup {
      * end fresh
      */
     public void finishRefresh() {
-        smothTo(0);
+
         isHeaderPulling = false;
         isFootPulling = false;
         isDispatchActionDown = false;
@@ -356,6 +358,16 @@ public class OverScrollerView extends ViewGroup {
         if (iHeaderView != null) {
             iHeaderView.onFinishRefresh();
         }
+
+        Handler handler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                smothTo(0);
+            }
+        };
+
+        handler.sendEmptyMessageDelayed(0, 800);
 
     }
 
