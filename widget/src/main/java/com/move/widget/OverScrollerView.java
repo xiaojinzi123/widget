@@ -37,8 +37,8 @@ public class OverScrollerView extends ViewGroup {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         int childCount = getChildCount();
-        if (childCount != 1) {
-            throw new RuntimeException("the childCount must be one");
+        if (childCount != 1 && childCount != 2) {
+            throw new RuntimeException("the childCount must between [1,2]");
         }
     }
 
