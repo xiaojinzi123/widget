@@ -192,6 +192,11 @@ public class OverScrollerView extends ViewGroup {
     @Override
     public boolean onTouchEvent(MotionEvent e) {
 
+        if (isFinishing) {
+            contentView.dispatchTouchEvent(e);
+            return true;
+        }
+
         dragHelper.processTouchEvent(e);
 
         MotionEvent mEvent = MotionEvent.obtain(e);
@@ -342,6 +347,8 @@ public class OverScrollerView extends ViewGroup {
 
     private IHeaderView iHeaderView;
 
+    private boolean isFinishing;
+
     /**
      * end fresh
      */
@@ -364,8 +371,11 @@ public class OverScrollerView extends ViewGroup {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
                 smothTo(0);
+                isFinishing = false;
             }
         };
+
+        isFinishing = true;
 
         handler.sendEmptyMessageDelayed(0, 800);
 
