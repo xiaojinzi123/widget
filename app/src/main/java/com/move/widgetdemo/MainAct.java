@@ -15,7 +15,7 @@ public class MainAct extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
-            view_over_scroll.finishRefresh();
+            view_over_scroll.finishRefresh(true);
 
         }
     };

@@ -379,7 +379,7 @@ public class OverScrollerView extends ViewGroup {
     /**
      * end fresh
      */
-    public void finishRefresh() {
+    public void finishRefresh(boolean isSuccess) {
 
         if (!isHeaderFreshing) { // 如果已经被取消掉了
             return;
@@ -394,7 +394,11 @@ public class OverScrollerView extends ViewGroup {
         isHeaderPreFreshing = false;
 
         if (iHeaderView != null) {
-            iHeaderView.onFinishRefresh();
+            if (isSuccess) {
+                iHeaderView.onFinishRefresh();
+            }else {
+                iHeaderView.onRefreshFail();
+            }
         }
 
         Handler handler = new Handler() {
@@ -463,6 +467,11 @@ public class OverScrollerView extends ViewGroup {
          * finish reFresh
          */
         void onFinishRefresh();
+
+        /**
+         * reFresh fail
+         */
+        void onRefreshFail();
 
     }
 

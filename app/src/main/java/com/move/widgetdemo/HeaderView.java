@@ -81,6 +81,12 @@ public class HeaderView extends FrameLayout implements OverScrollerView.IHeaderV
         System.out.println("--------------------刷新成功");
     }
 
+    @Override
+    public void onRefreshFail() {
+        tv.setText("刷新失败");
+        System.out.println("--------------------刷新失败");
+    }
+
     private OnListener mOnListener;
 
     public void setOnListener(OnListener l) {
