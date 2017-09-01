@@ -51,7 +51,7 @@ compile 'com.github.xiaojinzi123:widget:v1.1.7.6'
 ```
 
 #### result
-![](./imgs/4.png)
+                 ![](./imgs/4.png)
 
 ### StepView2
 #### use
@@ -192,4 +192,4 @@ compile 'com.github.xiaojinzi123:widget:v1.1.7.6'
 ```
 
 #### result
-![](./imgs/2.png)
+<img src="./imgs/2.png" width="300px" height="400px" />

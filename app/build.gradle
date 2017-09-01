@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def SystemVersion = '25.2.0'
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -21,5 +23,5 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':widget')
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile "com.android.support:appcompat-v7:$SystemVersion"
 }
