@@ -5,4 +5,15 @@
         <item>小金子达叔</item>
         <item>达叔小金子</item>
     </array>
+    <string-array name="test1">
+        <item>menu1</item>
+        <item>menu2</item>
+        <item>menu3</item>
+    </string-array>
+
+    <string-array name="test2">
+        <item>聊天</item>
+        <item>视频</item>
+    </string-array>
+
 </resources>

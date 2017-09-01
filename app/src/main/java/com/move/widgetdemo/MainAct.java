@@ -27,7 +27,7 @@ public class MainAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_main);
         RelativeSizeTextView tv = (RelativeSizeTextView) findViewById(R.id.tv);
-        tv.setTagText("傻逼");
+        tv.setTagText("嘿嘿");
 
         view_over_scroll = (OverScrollerView) findViewById(R.id.view_over_scroll);
 

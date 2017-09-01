@@ -23,6 +23,38 @@ compile 'com.github.xiaojinzi123:widget:v1.1.7.6'
 
 ## I will introduce all usage of weiget
 
+### TabHost
+#### use
+
+```
+<com.move.widget.XTabHost
+		app:data="@array/test1"
+		app:tab_space="1px"
+		app:bg="#123456"
+		android:padding="1dp"
+		app:default_index="1"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+
+<com.move.widget.XTabHost
+		app:data="@array/test2"
+		app:bg="@color/colorPrimaryDark"
+		android:layout_marginTop="10dp"
+		android:padding="1dp"
+		app:tab_select_color="@color/white"
+		app:tab_unselect_color="@color/colorPrimaryDark"
+		app:text_unselect_color="@color/white"
+		app:radius="50dp"
+		app:text_size="8sp"
+		app:text_select_color="@color/colorPrimaryDark"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
+
+```
+
+#### result
+<img src="./imgs/1.gif" width="400px" height="100px" />
+
 ### StepView1
 #### use
 
@@ -51,7 +83,7 @@ compile 'com.github.xiaojinzi123:widget:v1.1.7.6'
 ```
 
 #### result
-                 ![](./imgs/4.png)
+<img src="./imgs/4.png" width="600px" height="125px" />
 
 ### StepView2
 #### use
@@ -81,7 +113,7 @@ compile 'com.github.xiaojinzi123:widget:v1.1.7.6'
 ```
 
 #### result
-![](./imgs/3.png)
+<img src="./imgs/3.png" width="600px" height="125px" />
 
 ### RelativeSizeTextView
 #### use
@@ -103,7 +135,7 @@ compile 'com.github.xiaojinzi123:widget:v1.1.7.6'
 ```
 
 #### result
-![](./imgs/1.png)
+<img src="./imgs/1.png" width="600px" height="54px" />
 
 ### XFlowLayout
 #### use

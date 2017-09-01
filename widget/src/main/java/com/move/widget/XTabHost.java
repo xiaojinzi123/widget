@@ -65,7 +65,7 @@ public class XTabHost extends LinearLayout implements View.OnClickListener {
         tabWidth = a.getDimensionPixelSize(R.styleable.XTabHost_tab_width, dpToPx(tabWidth));
         tabHeight = a.getDimensionPixelSize(R.styleable.XTabHost_tab_height, -1);
 
-        CharSequence[] arr = a.getTextArray(R.styleable.XTabHost_src);
+        CharSequence[] arr = a.getTextArray(R.styleable.XTabHost_data);
         if (arr != null) {
             String[] tArr = new String[arr.length];
             for (int i = 0; i < arr.length; i++) {

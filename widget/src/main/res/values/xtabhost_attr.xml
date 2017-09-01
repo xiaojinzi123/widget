@@ -24,6 +24,6 @@
         <!--默认显示第几个-->
         <attr name="default_index" format="integer" />
         <!--显示的文本数组-->
-        <attr name="src" format="reference" />
+        <attr name="data" format="reference" />
     </declare-styleable>
 </resources>
