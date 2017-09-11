@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="titlebar_titlebar_container" type="id" />
+    <item name="titlebar_titlebar" type="id" />
+    <item name="titlebar_titlebar_goback" type="id" />
+    <item name="titlebar_titlebar_textmenu" type="id" />
+    <item name="titlebar_titlebar_imgmenu" type="id" />
+</resources>

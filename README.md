@@ -18,10 +18,35 @@ allprojects {
 add dependencies to your module build.gralde
 
 ```
-compile 'com.github.xiaojinzi123:widget:v1.1.7.7'
+compile 'com.github.xiaojinzi123:widget:v1.1.8'
 ```
 
 ## I will introduce all usage of weiget
+
+### Titlebar
+#### use
+
+```
+<com.move.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:titlebar_title_back_img="@mipmap/back"
+        app:titlebar_title_menu_img="@mipmap/ic_launcher"
+        app:titlebar_title_bg="#CCCCCC"
+        app:titlebar_title_text_color="@color/colorPrimaryDark"
+        app:titlebar_title_menu_img_padding="6dp"
+        app:titlebar_title_text_size="20"
+        app:titlebar_title_back_img_width="40dp"
+        app:titlebar_title_back_img_height="40dp"
+        app:titlebar_title_menu_img_width="40dp"
+        app:titlebar_title_menu_img_height="40dp"
+        app:titlebar_title_back_img_padding="6dp"
+        app:titlebar_title_text="你好" />
+
+```
+
+#### result
+<img src="./imgs/5.png" width="400px" height="100px" />
 
 ### TabHost
 #### use

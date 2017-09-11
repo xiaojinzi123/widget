@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="TitleBar" >
+        <!--标题栏整体的-->
+        <!--标题栏的类型-->
+        <attr name="titlebar_title_type" format="integer" />
+        <attr name="titlebar_title_fitsystem" format="boolean" />
+
+        <attr name="titlebar_title_ishave_line" format="boolean" />
+        <attr name="titlebar_title_bottom_line_color" format="color" />
+
+        <attr name="titlebar_title_bg" format="reference|color" />
+
+        <!--返回按钮-->
+        <attr name="titlebar_title_back_img" format="reference" />
+        <attr name="titlebar_title_back_img_padding" format="dimension" />
+        <attr name="titlebar_title_back_img_margin_left" format="dimension" />
+        <attr name="titlebar_title_back_img_width" format="dimension" />
+        <attr name="titlebar_title_back_img_height" format="dimension" />
+
+        <!--标题的-->
+        <attr name="titlebar_title_text" format="string" />
+        <attr name="titlebar_title_text_size" format="integer" />
+        <attr name="titlebar_title_text_color" format="color" />
+
+        <!--菜单的-->
+        <attr name="titlebar_title_menu_text" format="string" />
+        <attr name="titlebar_title_menu_color" format="color" />
+        <attr name="titlebar_title_menu_textsize" format="color" />
+        <attr name="titlebar_title_menu_margin_right" format="dimension" />
+
+        <attr name="titlebar_title_menu_img" format="reference" />
+        <attr name="titlebar_title_menu_img_width" format="dimension" />
+        <attr name="titlebar_title_menu_img_height" format="dimension" />
+        <attr name="titlebar_title_menu_img_padding" format="dimension" />
+
+    </declare-styleable>
+
+</resources>
