@@ -361,9 +361,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
                 dpVal, context.getResources().getDisplayMetrics());
     }
 
-    public static int spToPx(Context context, float dpVal) {
-        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, context.getResources().getDisplayMetrics());
+    public static int spToPx(Context context, float spVal) {
+        return (int)TypedValue.applyDimension(2, spVal, context.getResources().getDisplayMetrics());
     }
 
 }
