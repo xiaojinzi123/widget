@@ -15,7 +15,7 @@
         app:titlebar_title_bg="#2222FF"
         app:titlebar_title_text_color="@color/white"
         app:titlebar_title_menu_img_padding="6dp"
-        app:titlebar_title_text_size="20"
+        app:titlebar_title_text_size="20sp"
         app:titlebar_title_back_img_width="40dp"
         app:titlebar_title_back_img_height="40dp"
         app:titlebar_title_menu_img_width="40dp"

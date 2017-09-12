@@ -23,13 +23,13 @@
 
         <!--标题的-->
         <attr name="titlebar_title_text" format="string" />
-        <attr name="titlebar_title_text_size" format="integer" />
+        <attr name="titlebar_title_text_size" format="dimension" />
         <attr name="titlebar_title_text_color" format="color" />
 
         <!--菜单的-->
         <attr name="titlebar_title_menu_text" format="string" />
         <attr name="titlebar_title_menu_color" format="color" />
-        <attr name="titlebar_title_menu_textsize" format="color" />
+        <attr name="titlebar_title_menu_textsize" format="dimension" />
         <attr name="titlebar_title_menu_margin_right" format="dimension" />
 
         <attr name="titlebar_title_menu_img" format="reference" />

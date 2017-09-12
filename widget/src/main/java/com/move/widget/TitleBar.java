@@ -53,12 +53,12 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         imgBackHeight = a.getDimensionPixelSize(R.styleable.TitleBar_titlebar_title_back_img_height, dpToPx(context, IMG_BACK_HEIGHT));
 
         title = a.getString(R.styleable.TitleBar_titlebar_title_text);
-        titleTextSize = a.getInt(R.styleable.TitleBar_titlebar_title_text_size, TITLE_TEXTSIZE);
+        titleTextSize = a.getDimensionPixelSize(R.styleable.TitleBar_titlebar_title_text_size, spToPx(context, TITLE_TEXTSIZE));
         titleColor = a.getColor(R.styleable.TitleBar_titlebar_title_text_color, TITLE_TEXTCOLOR);
 
         menuText = a.getString(R.styleable.TitleBar_titlebar_title_menu_text);
         menuColor = a.getColor(R.styleable.TitleBar_titlebar_title_menu_color, TEXT_MENU_TEXTCOLOR);
-        menuTextSize = a.getInt(R.styleable.TitleBar_titlebar_title_menu_textsize, TEXT_MENU_TEXTSIZE);
+        menuTextSize = a.getDimensionPixelSize(R.styleable.TitleBar_titlebar_title_menu_textsize, spToPx(context, TEXT_MENU_TEXTSIZE));
         menuMarginRight = a.getDimensionPixelSize(R.styleable.TitleBar_titlebar_title_menu_margin_right, MENU_RIGHTMARGIN);
 
         menuDrwable = a.getDrawable(R.styleable.TitleBar_titlebar_title_menu_img);
@@ -101,6 +101,8 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
     private int TITLE_TEXTCOLOR = Color.BLACK;
 
     // 自定义属性的值
+
+    private int textTypedValue = TypedValue.COMPLEX_UNIT_PX;
 
     protected String title = "";
     protected int titleColor;
@@ -200,7 +202,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         lp.addRule(CENTER_IN_PARENT);
         tv_title.setLayoutParams(lp);
         tv_title.setTextColor(titleColor);
-        tv_title.setTextSize(titleTextSize);
+        tv_title.setTextSize(textTypedValue, titleTextSize);
         tv_title.setMaxLines(1);
         tv_title.setEllipsize(TextUtils.TruncateAt.END);
         tv_title.setGravity(Gravity.CENTER);
@@ -237,7 +239,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         lp.rightMargin = menuMarginRight;
         tv_menu.setLayoutParams(lp);
         tv_menu.setTextColor(menuColor);
-        tv_menu.setTextSize(menuTextSize);
+        tv_menu.setTextSize(textTypedValue, menuTextSize);
         if (TextUtils.isEmpty(menuText)) {
             tv_menu.setVisibility(INVISIBLE);
         } else {
@@ -355,6 +357,11 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
      * @return
      */
     public static int dpToPx(Context context, float dpVal) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                dpVal, context.getResources().getDisplayMetrics());
+    }
+
+    public static int spToPx(Context context, float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dpVal, context.getResources().getDisplayMetrics());
     }
