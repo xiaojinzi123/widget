@@ -44,6 +44,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
 
         titleBg = a.getDrawable(R.styleable.TitleBar_titlebar_title_bg);
         titleBgColor = a.getColor(R.styleable.TitleBar_titlebar_title_bg, Color.WHITE);
+        titleHeight = a.getDimensionPixelSize(R.styleable.TitleBar_titlebar_title_height, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         backDrwable = a.getDrawable(R.styleable.TitleBar_titlebar_title_back_img);
         imgBackPadding = a.getDimensionPixelSize(R.styleable.TitleBar_titlebar_title_back_img_padding, dpToPx(context, IMG_BACK_PADDING));
@@ -130,6 +131,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
 
     protected Drawable titleBg = null;
     protected int titleBgColor;
+    protected int titleHeight;
     protected Drawable backDrwable = null;
 
 
@@ -159,7 +161,7 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         rl.setId(R.id.titlebar_titlebar_container);
 
         LayoutParams lp = new LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                ViewGroup.LayoutParams.MATCH_PARENT, titleHeight
         );
 
         // 如果需要适应系统m

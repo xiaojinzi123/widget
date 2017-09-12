@@ -11,6 +11,8 @@
         <attr name="titlebar_title_bottom_line_color" format="color" />
 
         <attr name="titlebar_title_bg" format="reference|color" />
+        <!--标题栏的高度-->
+        <attr name="titlebar_title_height" format="dimension" />
 
         <!--返回按钮-->
         <attr name="titlebar_title_back_img" format="reference" />
