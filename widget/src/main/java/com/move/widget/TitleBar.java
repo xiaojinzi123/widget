@@ -68,8 +68,16 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
 
         a.recycle();
 
+        onConfigRead();
+
         init(context);
 
+    }
+
+    /**
+     * after read the config
+     */
+    protected void onConfigRead() {
     }
 
 
