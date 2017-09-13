@@ -73,6 +73,13 @@
 
                 </com.move.widget.XFlowLayout>
 
+                <com.move.widget.SingleLineGravityTextView
+                    android:layout_width="wrap_content"
+                    android:text="占位的文本"
+                    android:textSize="30sp"
+                    app:single_line_gravity_real_text="真实"
+                    android:layout_height="wrap_content" />
+
                 <com.move.widget.RelativeSizeTextView
                     android:id="@+id/tv"
                     android:layout_width="wrap_content"
