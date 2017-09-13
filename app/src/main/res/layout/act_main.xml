@@ -77,7 +77,6 @@
                     android:layout_width="wrap_content"
                     android:text="占位的文本"
                     android:textSize="30sp"
-                    android:textColor="#0000FF"
                     app:single_line_gravity_real_text="真实"
                     android:layout_height="wrap_content" />
 

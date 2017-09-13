@@ -3,9 +3,7 @@ package com.move.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.TextPaint;
 import android.text.TextUtils;
@@ -39,7 +37,6 @@ public class SingleLineGravityTextView extends AppCompatTextView {
 
         a.recycle();
 
-
     }
 
     @Override
@@ -51,9 +48,7 @@ public class SingleLineGravityTextView extends AppCompatTextView {
 
     @Override
     protected void onDraw(Canvas c) {
-        super.onDraw(c);
-
-        c.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        //super.onDraw(c);
 
         int width = getWidth();
         int height = getHeight();
@@ -63,6 +58,8 @@ public class SingleLineGravityTextView extends AppCompatTextView {
         if (paint == null || TextUtils.isEmpty(realText)) {
             return;
         }
+
+        paint.setColor(getCurrentTextColor());
 
         int realTextLength = realText.length();
 
@@ -80,7 +77,7 @@ public class SingleLineGravityTextView extends AppCompatTextView {
 
         Paint.FontMetrics fm = paint.getFontMetrics();
 
-        float top = Math.abs(fm.top - fm.leading);
+        float top = Math.abs(fm.ascent - fm.descent / 2);
 
         String start = realText.substring(0, 1);
         float textWidth = paint.measureText(start);
