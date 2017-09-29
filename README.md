@@ -18,7 +18,7 @@ allprojects {
 add dependencies to your module build.gralde
 
 ```
-compile 'com.github.xiaojinzi123:widget:v1.1.9.2'
+compile 'com.github.xiaojinzi123:widget:v1.1.9.3'
 ```
 
 ## I will introduce all usage of weiget

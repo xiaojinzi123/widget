@@ -314,13 +314,21 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         tv_title.setText(title);
     }
 
-    public void setMenuEable(boolean b) {
+    public void setTextMenuEable(boolean b) {
         tv_menu.setEnabled(b);
         if (b) {
             tv_menu.setTextColor(TEXT_MENU_TEXTCOLOR);
         } else {
             tv_menu.setTextColor(TEXT_MENU_TEXTCOLOR_DISABLED);
         }
+    }
+
+    public void setImgMenuVisiable(boolean b){
+        iv_menu.setVisibility(b?VISIBLE:INVISIBLE);
+    }
+
+    public void setTextMenuVisiable(boolean b){
+        tv_menu.setVisibility(b?VISIBLE:INVISIBLE);
     }
 
     public void setMenuColor(int color) {
