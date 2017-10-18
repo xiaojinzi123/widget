@@ -261,7 +261,9 @@ public class TitleBar extends RelativeLayout implements View.OnClickListener {
         lp.addRule(ALIGN_PARENT_START);
         iv_back.setLayoutParams(lp);
         if (backDrwable == null) {
+            iv_back.setEnabled(false);
         } else {
+            iv_back.setEnabled(true);
             iv_back.setImageDrawable(backDrwable);
         }
         rl.addView(iv_back);
