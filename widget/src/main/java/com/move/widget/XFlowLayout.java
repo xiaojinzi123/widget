@@ -13,6 +13,8 @@ import android.view.ViewGroup;
  * 流式布局这个可以放任何控件,但是每一个孩子高度都是一样的
  * 关于宽度,此控件并没有处理测量,都是直接采用父容器推荐的宽,所以不能放在水平的列表或者水平的滚动ScrollerView中
  * 关于高度,控件支持了包裹和填充父容器,也支持在竖直的列表和滚动ScrollerView中
+ *
+ * @note: 子控件不支持使用margin等属性
  */
 public class XFlowLayout extends ViewGroup {
 
@@ -33,7 +35,8 @@ public class XFlowLayout extends ViewGroup {
 
         mHSpace = a.getDimensionPixelSize(R.styleable.XFlowLayout_h_space, dpToPx(10));
         mVSpace = a.getDimensionPixelSize(R.styleable.XFlowLayout_v_space, dpToPx(10));
-        mMaxLines = a.getInt(R.styleable.XFlowLayout_maxlines, -1);
+        mMaxLines = a.getInt(R.styleable.XFlowLayout_maxlines, 1);
+        mMaxColums = a.getInt(R.styleable.XFlowLayout_maxcolums, 1);
 
         a.recycle();
 
@@ -50,47 +53,58 @@ public class XFlowLayout extends ViewGroup {
         int modeWidth = MeasureSpec.getMode(widthMeasureSpec);
         int modeHeight = MeasureSpec.getMode(heightMeasureSpec);
 
-        //测量孩子的大小
+        // 测量孩子的大小
         measureChildren(widthMeasureSpec, heightMeasureSpec);
-
-        //寻找孩子中最高的一个孩子,找到的值会放在mChildMaxHeight变量中
-        findMaxChildMaxHeight();
-
-        //初始化值
-        int left = getPaddingLeft(), top = getPaddingTop();
 
         // 几行
         int lines = 1;
+        int colums = 0;
 
-        //循环所有的孩子
+        int contentLeft = getPaddingLeft();
+        int contentTop = getPaddingTop();
+        int contentRight = sizeWidth - getPaddingRight();
+
+        // 初始化
+        int left = contentLeft, top = contentTop;
+        int lineStartIndex = 0, lineEndIndex = 0;
+
+        // 循环所有的孩子
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
+            lineEndIndex = i;
+            // 拿到每一个孩子
             View view = getChildAt(i);
+            // 每一个孩子的测量宽度
+            int childMeasuredWidth = view.getMeasuredWidth();
 
-            if (left != getPaddingLeft()) { //是否是一行的开头
-                if ((left + view.getMeasuredWidth()) > sizeWidth - getPaddingRight()) { //需要换行了,因为放不下啦
-                    // 如果到了最大的行数,就跳出,top就是当前的
-                    if (mMaxLines != -1 && mMaxLines <= lines) {
-                        break;
-                    }
-                    //计算出下一行的top
-                    top += mChildMaxHeight + mVSpace;
-                    left = getPaddingLeft();
-                    lines++;
+            // 如果满足说明这一个已经一行放不下了
+            if (left + childMeasuredWidth > contentRight || (mMaxColums >= 1 && colums >= mMaxColums)) {
+                // 如果到了最大的行数,就跳出,top就是当前的
+                if (mMaxLines >= 1 && mMaxLines <= lines) {
+                    break;
                 }
+                lineStartIndex = i;
+                top += findMaxChildMaxHeight(lineStartIndex, lineEndIndex) + mVSpace;
+                left = contentLeft;
+                lines++;
+                colums = 0;
             }
 
-            left += view.getMeasuredWidth() + mHSpace;
+            left += childMeasuredWidth + mHSpace;
+            colums++;
 
         }
+
+        // 计算出全部的高度
+        int measureHeight = top + findMaxChildMaxHeight(lineStartIndex, getChildCount() - 1) + getPaddingBottom();
 
         if (modeHeight == MeasureSpec.EXACTLY) {
             //直接使用父类推荐的宽和高
             setMeasuredDimension(sizeWidth, sizeHeight);
         } else if (modeHeight == MeasureSpec.AT_MOST) {
-            setMeasuredDimension(sizeWidth, (top + mChildMaxHeight + getPaddingBottom()) > sizeHeight ? sizeHeight : top + mChildMaxHeight + getPaddingBottom());
+            setMeasuredDimension(sizeWidth, measureHeight > sizeHeight ? sizeHeight : measureHeight);
         } else {
-            setMeasuredDimension(sizeWidth, top + mChildMaxHeight + getPaddingBottom());
+            setMeasuredDimension(sizeWidth, measureHeight);
         }
 
     }
@@ -98,12 +112,9 @@ public class XFlowLayout extends ViewGroup {
     /**
      * -1表示不限制,最多显示几行
      */
-    private int mMaxLines = -1;
+    private int mMaxLines = 1;
 
-    /**
-     * 孩子中最高的一个
-     */
-    private int mChildMaxHeight;
+    private int mMaxColums = 1;
 
     /**
      * 每一个孩子的左右的间距
@@ -120,57 +131,67 @@ public class XFlowLayout extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
-        findMaxChildMaxHeight();
-
         //开始安排孩子的位置
 
-        //初始化值
-        int left = getPaddingLeft(), top = getPaddingTop();
+        int contentLeft = getPaddingLeft();
+        int contentTop = getPaddingTop();
+        int contentRight = getWidth() - getPaddingRight();
+
+        // 初始化
+        int left = contentLeft, top = contentTop;
+        int lineStartIndex = 0, lineEndIndex = 0;
 
         // 几行
         int lines = 1;
+        int colums = 0;
 
         //循环所有的孩子
         int childCount = getChildCount();
         for (int i = 0; i < childCount; i++) {
+            lineEndIndex = i;
+            // 获取到每一个孩子
             View view = getChildAt(i);
+            // 每一个孩子的测量宽度
+            int childMeasuredWidth = view.getMeasuredWidth();
 
-            if (left != getPaddingLeft()) { //是否是一行的开头
-                if ((left + view.getMeasuredWidth()) > getWidth() - getPaddingRight()) { //需要换行了,因为放不下啦
-                    // 如果到了最大的行数,就跳出,top就是当前的
-                    if (mMaxLines != -1 && mMaxLines <= lines) {
-                        break;
-                    }
-                    //计算出下一行的top
-                    top += mChildMaxHeight + mVSpace;
-                    left = getPaddingLeft();
-                    lines++;
+            // 如果满足说明这一个已经一行放不下了
+            if (left + childMeasuredWidth > contentRight || (mMaxColums >= 1 && colums >= mMaxColums)) {
+                // 如果到了最大的行数,就跳出,top就是当前的
+                if (mMaxLines >= 1 && mMaxLines <= lines) {
+                    break;
                 }
+                lineStartIndex = i;
+                top += findMaxChildMaxHeight(lineStartIndex, lineEndIndex) + mVSpace;
+                left = contentLeft;
+                lines++;
+                colums = 0;
             }
 
-            int dy = (mChildMaxHeight - view.getMeasuredHeight()) / 2;
+            //int dy = (mChildMaxHeight - view.getMeasuredHeight()) / 2;
 
             //安排孩子的位置
-            view.layout(left, top + dy, left + view.getMeasuredWidth(), top + view.getMeasuredHeight() + dy);
+            view.layout(left, top, left + childMeasuredWidth, top + view.getMeasuredHeight());
 
             left += view.getMeasuredWidth() + mHSpace;
+            colums++;
 
         }
 
     }
 
     /**
-     * 寻找孩子中最高的一个孩子
+     * @param startIndex
+     * @param endIndex
      */
-    private void findMaxChildMaxHeight() {
-        mChildMaxHeight = 0;
-        int childCount = getChildCount();
-        for (int i = 0; i < childCount; i++) {
+    private int findMaxChildMaxHeight(int startIndex, int endIndex) {
+        int result = 0;
+        for (int i = startIndex; i <= endIndex; i++) {
             View view = getChildAt(i);
-            if (view.getMeasuredHeight() > mChildMaxHeight) {
-                mChildMaxHeight = view.getMeasuredHeight();
+            if (view.getMeasuredHeight() > result) {
+                result = view.getMeasuredHeight();
             }
         }
+        return result;
     }
 
     /**
