@@ -110,11 +110,14 @@ public class XFlowLayout extends ViewGroup {
     }
 
     /**
-     * -1表示不限制,最多显示几行
+     * <1 表示不限制
      */
-    private int mMaxLines = 1;
+    private int mMaxLines = 0;
 
-    private int mMaxColums = 1;
+    /**
+     * <1 表示不限制
+     */
+    private int mMaxColums = 0;
 
     /**
      * 每一个孩子的左右的间距
