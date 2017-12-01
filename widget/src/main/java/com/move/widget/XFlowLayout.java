@@ -35,8 +35,8 @@ public class XFlowLayout extends ViewGroup {
 
         mHSpace = a.getDimensionPixelSize(R.styleable.XFlowLayout_h_space, dpToPx(10));
         mVSpace = a.getDimensionPixelSize(R.styleable.XFlowLayout_v_space, dpToPx(10));
-        mMaxLines = a.getInt(R.styleable.XFlowLayout_maxlines, 1);
-        mMaxColums = a.getInt(R.styleable.XFlowLayout_maxcolums, 1);
+        mMaxLines = a.getInt(R.styleable.XFlowLayout_maxlines, mMaxLines);
+        mMaxColums = a.getInt(R.styleable.XFlowLayout_maxcolums, mMaxColums);
 
         a.recycle();
 
